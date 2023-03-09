@@ -2,6 +2,7 @@ import axios from 'axios'
 import {
   ElMessage
 } from 'element-plus'
+// import router from '@/router'
 
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API,
@@ -9,7 +10,7 @@ const service = axios.create({
 })
 
 // 请求拦截器请求头增加token
-service.interceptors.response.use(
+service.interceptors.request.use(
   (config) => {
     config.headers.Authorization = localStorage.getItem('token')
     return config
