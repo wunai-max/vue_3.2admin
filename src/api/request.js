@@ -8,6 +8,17 @@ const service = axios.create({
   timeout: 5000
 })
 
+// 请求拦截器请求头增加token
+service.interceptors.response.use(
+  (config) => {
+    config.headers.Authorization = localStorage.getItem('token')
+    return config
+  },
+  (error) => {
+    return Promise.reject(new Error(error))
+  }
+)
+
 // axios响应请求拦截器 简化返回数据
 service.interceptors.response.use(
   (response) => {
